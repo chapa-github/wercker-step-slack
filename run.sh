@@ -77,23 +77,23 @@ if [ -n "$WERCKER_SLACK_NOTIFIER_BRANCH" ]; then
 fi
 
 # post the result to the slack webhook
-RESULT=$(curl -d "payload=$json" -s "$WERCKER_SLACK_NOTIFIER_URL" --output "$WERCKER_STEP_ROOT"/result.txt -w "%{http_code}")
-cat "$WERCKER_STEP_ROOT/result.txt"
+RESULT=$(curl -d "payload=$json" -s "$WERCKER_SLACK_NOTIFIER_URL" --output ./result.txt -w "%{http_code}")
+cat ./result.txt
 
 if [ "$RESULT" = "500" ]; then
-  if grep -Fqx "No token" "$WERCKER_STEP_ROOT/result.txt"; then
+  if grep -Fqx "No token" "./result.txt"; then
     fail "No token is specified."
   fi
 
-  if grep -Fqx "No hooks" "$WERCKER_STEP_ROOT/result.txt"; then
+  if grep -Fqx "No hooks" "./result.txt"; then
     fail "No hook can be found for specified subdomain/token"
   fi
 
-  if grep -Fqx "Invalid channel specified" "$WERCKER_STEP_ROOT/result.txt"; then
+  if grep -Fqx "Invalid channel specified" "./result.txt"; then
     fail "Could not find specified channel for subdomain/token."
   fi
 
-  if grep -Fqx "No text specified" "$WERCKER_STEP_ROOT/result.txt"; then
+  if grep -Fqx "No text specified" "./result.txt"; then
     fail "No text specified."
   fi
 fi
