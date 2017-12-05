@@ -1,7 +1,7 @@
 #!/bin/bash
 #source build-esen.sh
 
-# check if slack webhook url is present
+## check if slack webhook url is present
 if [ -z "$WERCKER_SLACK_NOTIFIER_URL" ]; then
   fail "Please provide a Slack webhook URL"
 fi
