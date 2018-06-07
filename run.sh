@@ -32,12 +32,12 @@ else
   export ACTION_URL=$WERCKER_BUILD_URL
 fi
 
-export MESSAGE="<$ACTION_URL|$ACTION> for $WERCKER_APPLICATION_NAME by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH on run $WERCKER_RUN_ID"
+# export MESSAGE="<$ACTION_URL|$ACTION> for $WERCKER_APPLICATION_NAME by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH on run $WERCKER_RUN_ID"
 export FALLBACK="$ACTION for $WERCKER_APPLICATION_NAME by $WERCKER_STARTED_BY has $WERCKER_RESULT on branch $WERCKER_GIT_BRANCH"
 export COLOR="good"
 
 if [ "$WERCKER_RESULT" = "failed" ]; then
-  export MESSAGE="$MESSAGE at step: $WERCKER_FAILED_STEP_DISPLAY_NAME"
+#   export MESSAGE="$MESSAGE at step: $WERCKER_FAILED_STEP_DISPLAY_NAME"
   export FALLBACK="$FALLBACK at step: $WERCKER_FAILED_STEP_DISPLAY_NAME"
   export COLOR="danger"
 fi
@@ -56,8 +56,27 @@ json=$json"
     \"attachments\":[
       {
         \"fallback\": \"$FALLBACK\",
-        \"text\": \"$MESSAGE\",
-        \"color\": \"$COLOR\"
+        \"author_name\": \"$WERCKER_STARTED_BY\",
+        \"title\": \"$WERCKER_APPLICATION_NAME\",
+        \"title_link\": \"$ACTION_URL\",
+        \"color\": \"$COLOR\",
+          \"fields\": [
+            {
+              \"title\": \"branch\",
+              \"value\": \"$WERCKER_GIT_BRANCH\",
+              \"short\": true
+            },
+            {
+              \"title\": \"result\",
+              \"value\": \"$WERCKER_RESULT\",
+              \"short\": true
+            },
+            {
+              \"title\": \"Run ID\",
+              \"value\": \"$WERCKER_RUN_ID\",
+              \"short\": false
+            },
+          ]
       }
     ]
 }"
