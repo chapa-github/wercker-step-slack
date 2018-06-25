@@ -1,13 +1,9 @@
 box: debian:stable-slim
 build:
-    steps:
-        - shellcheck:
-            files: run.sh
-
-        - script:
-            name: prepare output
-            code: rm -rf $WERCKER_ROOT/.git
-
+  steps:
+    - script:
+      name: remove git
+      code: rm -rf $WERCKER_ROOT/.git
 publish:
   steps:
     - internal/publish-step:
