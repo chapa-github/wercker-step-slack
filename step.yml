@@ -1,26 +1,26 @@
 name: slack-notifier
 version: 1.0.0
-description: Posts wercker build/deploy status to a Slack channel.
-keywords:
+summary: Posts wercker build/deploy status to a Slack channel.
+tags:
   - notification
   - webhook
   - slack
 properties:
-  url:
+  - name: url
     type: string
     required: true
-  channel:
+  - name: channel
     type: string
     required: false
-  username:
+  - name: username
     type: string
     required: false
-  notify_on:
+  - name: notify_on
     type: string
     required: false
-  icon_url:
+  - name: icon_url
     type: string
     required: false
-  branch:
+  - name: branch
     type: string
     required: false
