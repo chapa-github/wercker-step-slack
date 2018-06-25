@@ -6,5 +6,8 @@ build:
       code: rm -rf $WERCKER_ROOT/.git
 publish:
   steps:
+    - install-packages:
+    packages: ca-certificates
+
     - internal/publish-step:
-        owner: chapa
+    owner: chapa
