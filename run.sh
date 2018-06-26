@@ -55,10 +55,10 @@ json=$json"
     \"icon_url\":\"$WERCKER_SLACK_NOTIFIER_ICON_URL\",
     \"attachments\":[
       {
-        \"fallback\": \"$FALLBACK\",
         \"author_name\": \"$WERCKER_STARTED_BY\",
         \"title\": \"$WERCKER_APPLICATION_NAME\",
         \"title_link\": \"$ACTION_URL\",
+        \"text\":  \"$FALLBACK\",
         \"color\": \"$COLOR\",
           \"fields\": [
             {
@@ -72,9 +72,14 @@ json=$json"
               \"short\": true
             },
             {
-              \"title\": \"Run ID\",
+              \"title\": \"action\",
+              \"value\": \"$ACTION\",
+              \"short\": true
+            },
+            {
+              \"title\": \"runId\",
               \"value\": \"$WERCKER_RUN_ID\",
-              \"short\": false
+              \"short\": true
             },
           ]
       }
